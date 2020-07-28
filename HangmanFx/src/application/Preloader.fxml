@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+   <children>
+      <ImageView fitHeight="509.0" fitWidth="757.0" layoutX="-10.0" layoutY="-6.0">
+         <image>
+            <Image url="@../images/hangman.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
