@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Preloader;
+import javafx.application.Preloader.StateChangeNotification;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,6 +28,18 @@ public class HangmanPreload extends Preloader {
 		
 		
 	}
+	@Override
+    public void handleStateChangeNotification(Preloader.StateChangeNotification info) {
+      
+        StateChangeNotification.Type type = info.getType();
+        switch (type) {
+            
+            case BEFORE_START:
+                // Called after MyApplication#init and before MyApplication#start is called.
+                System.out.println("BEFORE_START");
+                preloaderStage.hide();
+                break;
+        }
 
 }
-
+}

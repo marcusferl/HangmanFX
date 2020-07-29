@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -9,33 +17,66 @@
 
 <AnchorPane prefHeight="424.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
    <children>
-      <ImageView fx:id="hangmanImage" fitHeight="190.0" fitWidth="262.0" layoutX="316.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="425.0" fitWidth="636.0" layoutX="-2.0">
+         <image>
+            <Image url="@../images/bg.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="hangmanImage" fitHeight="180.0" fitWidth="258.0" layoutX="370.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <Bloom threshold="0.0" />
+         </effect></ImageView>
       <TextField fx:id="textField" layoutX="37.0" layoutY="298.0" prefHeight="72.0" prefWidth="82.0" promptText="...">
          <font>
             <Font size="41.0" />
          </font>
       </TextField>
-      <Text fx:id="text" layoutX="224.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="359.13671875">
+      <Text fx:id="text" fill="#f5f5f5" layoutX="130.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="359.13671875">
          <font>
-            <Font size="54.0" />
+            <Font size="48.0" />
          </font>
+         <effect>
+            <DropShadow color="#d70a0a" height="15.07" radius="7.775" spread="0.45" width="18.03" />
+         </effect>
       </Text>
-      <Button layoutX="145.0" layoutY="329.0" mnemonicParsing="false" onAction="#checkLetter" text="Bestätigen" />
-      <Button layoutX="22.0" layoutY="29.0" mnemonicParsing="false" onAction="#newGame" text="New Game" />
-      <Text layoutX="22.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bitte einen Buchstaben eingeben" textAlignment="CENTER" wrappingWidth="295.0">
+      <Button layoutX="144.0" layoutY="342.0" mnemonicParsing="false" onAction="#checkLetter" prefHeight="33.0" prefWidth="155.0" text="Bestätigen">
+         <effect>
+            <Lighting surfaceScale="10.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant color="#e11111" />
+               </light>
+            </Lighting>
+         </effect></Button>
+      <Button layoutX="144.0" layoutY="295.0" mnemonicParsing="false" onAction="#newGame" prefHeight="33.0" prefWidth="155.0" text="New Game">
+         <effect>
+            <Lighting surfaceScale="4.87">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant color="#f20000" />
+               </light>
+            </Lighting>
+         </effect></Button>
+      <Text fill="#ff2222" layoutX="9.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wähle weise " wrappingWidth="195.0">
          <font>
-            <Font size="18.0" />
+            <Font name="Harrington" size="27.0" />
          </font>
+         <effect>
+            <Reflection />
+         </effect>
       </Text>
-      <Text layoutX="20.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zu erratendes Wort" textAlignment="CENTER" wrappingWidth="197.13671875">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text fx:id="info" fill="#f20808" layoutX="37.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="137.13671875">
+      <Text fx:id="info" fill="#f20808" layoutX="9.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="137.13671875">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
+      <Label fx:id="zuErratendesWort" alignment="CENTER" layoutX="76.0" layoutY="14.0" prefHeight="87.0" prefWidth="481.0" text="H  A  N  G  M  A  N" textFill="#f8f5f5">
+         <effect>
+            <DropShadow color="#b91515" height="53.62" radius="21.862499999999997" spread="0.76" width="35.83" />
+         </effect></Label>
    </children>
 </AnchorPane>
