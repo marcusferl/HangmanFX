@@ -59,7 +59,7 @@ public class Main extends Application {
 	private void handleButtonAction(ActionEvent event) {
 	}
 
-	// Game
+	// G A M E
 
 	public void initialize(URL url, ResourceBundle rb) {
 		label = progress;
@@ -170,9 +170,9 @@ public class Main extends Application {
 
 	// Returns the difficult wordlist
 	public InputStream difficult() {
-		String easy = "/wordeasy.txt";
-		String medium = "/wordmedium.txt";
-		String hard = "/wordhard.txt";
+		String easy = "/wordlists/wordeasy.txt";
+		String medium = "/wordlists/wordmedium.txt";
+		String hard = "/wordlists/wordhard.txt";
 
 		InputStream in = null;
 
