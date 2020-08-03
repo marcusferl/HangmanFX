@@ -42,29 +42,17 @@ public class Main extends Application {
 	Text info;
 	@FXML
 	Label title;
-	@FXML
-	private Label progress;
-	public static Label label;
+	
 	@FXML
 	RadioButton easy;
 	@FXML
 	RadioButton medium;
 	@FXML
 	RadioButton hard;
-	@FXML
-	private ProgressBar progressBar;
-	public static ProgressBar statProgressBar;
-
-	@FXML
-	private void handleButtonAction(ActionEvent event) {
-	}
-
+	
 	// G A M E
 
-	public void initialize(URL url, ResourceBundle rb) {
-		label = progress;
-		statProgressBar = progressBar;
-	}
+	
 
 	private static final int COUNT_LIMIT = 10;
 
@@ -207,7 +195,7 @@ public class Main extends Application {
 			double progress = (double) i / 10;
 			System.out.println("progress: " + progress);
 			LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(progress));
-			Thread.sleep(250);
+			Thread.sleep(350);
 		}
 
 	}

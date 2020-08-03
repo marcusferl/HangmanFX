@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Preloader;
+import javafx.application.Preloader.ProgressNotification;
 import javafx.application.Preloader.StateChangeNotification;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,6 +28,12 @@ public class HangmanPreload extends Preloader {
 		preloaderStage.show();
 		
 		
+	}
+	@Override
+	public void handleApplicationNotification(Preloader.PreloaderNotification info) {
+		if(info instanceof ProgressNotification) {
+			StartScreenController.statProgressBar.setProgress(((ProgressNotification) info).getProgress() );
+			}
 	}
 	@Override
     public void handleStateChangeNotification(Preloader.StateChangeNotification info) {

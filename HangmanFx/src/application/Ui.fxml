@@ -21,12 +21,12 @@
 
 <AnchorPane prefHeight="424.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
    <children>
-      <ImageView fitHeight="425.0" fitWidth="636.0" layoutX="-2.0">
+      <ImageView fitHeight="425.0" fitWidth="634.0">
          <image>
-            <Image url="@../images/bg.jpg" />
+            <Image url="@../../../../../Desktop/test.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="hangmanImage" fitHeight="194.0" fitWidth="235.0" layoutX="393.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="hangmanImage" fitHeight="202.0" fitWidth="256.0" layoutX="378.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
          <effect>
             <Bloom threshold="0.0" />
          </effect></ImageView>

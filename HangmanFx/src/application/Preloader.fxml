@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StartScreenController">
    <children>
       <ImageView fitHeight="509.0" fitWidth="757.0" layoutX="-10.0" layoutY="-6.0">
          <image>
             <Image url="@../images/hangman.jpg" />
          </image>
       </ImageView>
+      <ImageView fitHeight="129.0" fitWidth="148.0" layoutX="592.0" layoutY="8.0">
+         <image>
+            <Image url="@../images/mfproduktion.png" />
+         </image>
+      </ImageView>
+      <ProgressBar fx:id="progressBar" layoutX="15.0" layoutY="476.0" prefHeight="19.0" prefWidth="725.0" progress="0.0">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant color="RED" />
+               </light>
+            </Lighting>
+         </effect>
+      </ProgressBar>
    </children>
 </AnchorPane>
