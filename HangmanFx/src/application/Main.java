@@ -68,7 +68,7 @@ public class Main extends Application {
 
 	private static final int COUNT_LIMIT = 10;
 
-	String wort;
+	private String wort;
 	String rightletterString;
 
 	char[] wortToArr;
@@ -116,9 +116,12 @@ public class Main extends Application {
 	public boolean letterCheck(char[] wortToArr, char[] displayWord) {
 
 		for (int i = 0; i < wort.length(); i++) {
-			if (letter.getText().isEmpty() == false && wortToArr[i] == letter.getText().charAt(0)) {
+			if (letter.getText().isEmpty() == false) {
+				if(wortToArr[i] == letter.getText().toLowerCase().charAt(0) || wortToArr[i] == letter.getText().toUpperCase().charAt(0)) {
 				displayWord[i] = wortToArr[i];
 				return true;
+				}
+				
 			}
 
 		}
@@ -142,7 +145,7 @@ public class Main extends Application {
 
 		if (counter == 16) {
 			hangmanWord.setText(wort);
-			
+
 		}
 	}
 
