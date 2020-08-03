@@ -1,8 +1,6 @@
 package application;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,49 +22,52 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Main extends Application {
 
 	// Scenebuilder
 	@FXML
-	Text text;
+	Text hangmanWord;
 	@FXML
 	ImageView hangmanImage;
 	@FXML
-	TextField textField;
+	TextField letter;
 	@FXML
 	Text info;
 	@FXML
-	Label zuErratendesWort;
+	Label title;
 	@FXML
-    private Label progress;
-    
-    public static Label label;
-    
-    
-    @FXML
-    private ProgressBar progressBar;
-    
-    public static ProgressBar statProgressBar;
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-       
-        
-    }
-    
-    public void initialize(URL url, ResourceBundle rb) {
-       label = progress ;
-       statProgressBar = progressBar;
-    }    
-    private static final int COUNT_LIMIT = 10;
-    
-    
+	private Label progress;
+	public static Label label;
+	@FXML
+	RadioButton easy;
+	@FXML
+	RadioButton medium;
+	@FXML
+	RadioButton hard;
+	@FXML
+	private ProgressBar progressBar;
+	public static ProgressBar statProgressBar;
+
+	@FXML
+	private void handleButtonAction(ActionEvent event) {
+	}
+
+	// Game
+
+	public void initialize(URL url, ResourceBundle rb) {
+		label = progress;
+		statProgressBar = progressBar;
+	}
+
+	private static final int COUNT_LIMIT = 10;
+
 	String wort;
 	String rightletterString;
 
@@ -79,17 +80,12 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("Ui.fxml"));
-
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			
-			
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("****HANGMAN****");
 			primaryStage.show();
-			
-			
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -110,7 +106,7 @@ public class Main extends Application {
 			displayWord[i] = '-';
 		}
 		String textfieldString = new String(displayWord);
-		text.setText(textfieldString);
+		hangmanWord.setText(textfieldString);
 		counter = 1;
 		hangmanImage.setImage(null);
 		info.setText("");
@@ -120,7 +116,7 @@ public class Main extends Application {
 	public boolean letterCheck(char[] wortToArr, char[] displayWord) {
 
 		for (int i = 0; i < wort.length(); i++) {
-			if (wortToArr[i] == textField.getText().charAt(0)) {
+			if (letter.getText().isEmpty() == false && wortToArr[i] == letter.getText().charAt(0)) {
 				displayWord[i] = wortToArr[i];
 				return true;
 			}
@@ -129,12 +125,12 @@ public class Main extends Application {
 		return false;
 	}
 
-	// Button to confirm\check typed Letter
+	// Confirm\check typed Letter
 	public void checkLetter() {
 		info.setText("");
 		if (letterCheck(wortToArr, displayWord) == true) {
 			rightletterString = new String(displayWord);
-			text.setText(rightletterString);
+			hangmanWord.setText(rightletterString);
 			info.setText("Richtig");
 
 		} else {
@@ -142,16 +138,24 @@ public class Main extends Application {
 			info.setText("Falsch");
 			counter++;
 		}
-		textField.clear();
+		letter.clear();
+
+		if (counter == 16) {
+			hangmanWord.setText(wort);
+			
+		}
 	}
 
 	// Returns a Word from txt file
 	public String newWord() throws FileNotFoundException {
-		Random random = new Random();
+
 		String line;
 		ArrayList<String> temp = new ArrayList<String>();
-		InputStream in = getClass().getResourceAsStream("/wort.txt");
-		BufferedReader bf = new BufferedReader(new InputStreamReader(in));
+		Random random = new Random();
+
+		letter.setDisable(false);
+
+		BufferedReader bf = new BufferedReader(new InputStreamReader(difficult()));
 		try {
 			while ((line = bf.readLine()) != null) {
 				temp.add(line);
@@ -163,24 +167,47 @@ public class Main extends Application {
 
 		return temp.get(random.nextInt(temp.size())).toString();
 	}
+
+	// Returns the difficult wordlist
+	public InputStream difficult() {
+		String easy = "/wordeasy.txt";
+		String medium = "/wordmedium.txt";
+		String hard = "/wordhard.txt";
+
+		InputStream in = null;
+
+		if (this.easy.isSelected()) {
+			in = getClass().getResourceAsStream(easy);
+
+		}
+		if (this.medium.isSelected()) {
+			in = getClass().getResourceAsStream(medium);
+
+		}
+		if (this.hard.isSelected()) {
+			in = getClass().getResourceAsStream(hard);
+
+		} else {
+			in = getClass().getResourceAsStream(easy);
+
+		}
+		return in;
+	}
+
+	// Preloader
 	@Override
-	  public void init() throws Exception {       
-	      
-	      // Perform some heavy lifting (i.e. database start, check for application updates, etc. )
-	      for (int i = 1; i <= COUNT_LIMIT; i++) {
-	          double progress = (double) i/10;
-	          System.out.println("progress: " +  progress);            
-	          LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(progress));
-	          Thread.sleep(250);
-	      }
-	      
-	  }
-	
-	      
-	  
-	
-	      
-	  
+	public void init() throws Exception {
+
+		// Perform some heavy lifting (i.e. database start, check for application
+		// updates, etc. )
+		for (int i = 1; i <= COUNT_LIMIT; i++) {
+			double progress = (double) i / 10;
+			System.out.println("progress: " + progress);
+			LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(progress));
+			Thread.sleep(250);
+		}
+
+	}
 
 	public static void main(String[] args) {
 		LauncherImpl.launchApplication(Main.class, HangmanPreload.class, args);
