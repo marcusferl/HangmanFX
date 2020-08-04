@@ -23,14 +23,14 @@
    <children>
       <ImageView fitHeight="425.0" fitWidth="634.0">
          <image>
-            <Image url="@../../../../../Desktop/test.gif" />
+            <Image url="@../images/bg.gif" />
          </image>
       </ImageView>
       <ImageView fx:id="hangmanImage" fitHeight="202.0" fitWidth="256.0" layoutX="378.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
          <effect>
             <Bloom threshold="0.0" />
          </effect></ImageView>
-      <TextField fx:id="letter" disable="true" layoutX="37.0" layoutY="298.0" prefHeight="72.0" prefWidth="82.0" promptText="...">
+      <TextField fx:id="letter" disable="true" layoutX="37.0" layoutY="298.0" onKeyReleased="#checkLetter" prefHeight="72.0" prefWidth="82.0" promptText="...">
          <font>
             <Font size="41.0" />
          </font>
@@ -43,7 +43,7 @@
             <DropShadow color="#d70a0a" height="15.07" radius="7.775" spread="0.45" width="18.03" />
          </effect>
       </Text>
-      <Button layoutX="144.0" layoutY="342.0" mnemonicParsing="false" onAction="#checkLetter" prefHeight="33.0" prefWidth="155.0" text="Bestätigen">
+      <Button layoutX="144.0" layoutY="342.0" mnemonicParsing="false" onAction="#exit" prefHeight="33.0" prefWidth="155.0" text="Exit">
          <effect>
             <Lighting surfaceScale="10.0">
                <bumpInput>

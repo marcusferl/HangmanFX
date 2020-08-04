@@ -11,6 +11,8 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.sun.javafx.application.LauncherImpl;
+import com.sun.javafx.scene.EnteredExitedHandler;
+import com.sun.media.jfxmedia.events.PlayerEvent;
 
 import javafx.application.Application;
 import javafx.application.Preloader;
@@ -27,6 +29,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 
 public class Main extends Application {
@@ -42,17 +46,14 @@ public class Main extends Application {
 	Text info;
 	@FXML
 	Label title;
-	
 	@FXML
 	RadioButton easy;
 	@FXML
 	RadioButton medium;
 	@FXML
 	RadioButton hard;
-	
-	// G A M E
 
-	
+	// G A M E
 
 	private static final int COUNT_LIMIT = 10;
 
@@ -79,7 +80,7 @@ public class Main extends Application {
 		}
 	}
 
-	// Button New Game
+	// New Game
 	public void newGame() {
 		try {
 			wort = newWord();
@@ -100,16 +101,17 @@ public class Main extends Application {
 		info.setText("");
 	}
 
-	// Check the letter input from Textfield
+	// Check the letter from Textfield
 	public boolean letterCheck(char[] wortToArr, char[] displayWord) {
 
 		for (int i = 0; i < wort.length(); i++) {
 			if (letter.getText().isEmpty() == false) {
-				if(wortToArr[i] == letter.getText().toLowerCase().charAt(0) || wortToArr[i] == letter.getText().toUpperCase().charAt(0)) {
-				displayWord[i] = wortToArr[i];
-				return true;
+				if (wortToArr[i] == letter.getText().toLowerCase().charAt(0)
+						|| wortToArr[i] == letter.getText().toUpperCase().charAt(0)) {
+					displayWord[i] = wortToArr[i];
+					return true;
 				}
-				
+
 			}
 
 		}
@@ -119,21 +121,33 @@ public class Main extends Application {
 	// Confirm\check typed Letter
 	public void checkLetter() {
 		info.setText("");
+
 		if (letterCheck(wortToArr, displayWord) == true) {
 			rightletterString = new String(displayWord);
 			hangmanWord.setText(rightletterString);
 			info.setText("Richtig");
+			
+			AudioClip correctLetter = new AudioClip(
+					this.getClass().getResource("/sounds/correct.mp3").toExternalForm());
+			correctLetter.play();
 
 		} else {
 			hangmanImage.setImage(new Image("/images/" + counter + ".png"));
 			info.setText("Falsch");
+			
+			if (counter < 15) {
+				AudioClip wrongLetter = new AudioClip(
+						this.getClass().getResource("/sounds/wrong.mp3").toExternalForm());
+				wrongLetter.play();
+			}
 			counter++;
 		}
 		letter.clear();
 
 		if (counter == 16) {
 			hangmanWord.setText(wort);
-
+			AudioClip wrongLetter = new AudioClip(this.getClass().getResource("/sounds/gameover.mp3").toExternalForm());
+			wrongLetter.play();
 		}
 	}
 
@@ -159,30 +173,34 @@ public class Main extends Application {
 		return temp.get(random.nextInt(temp.size())).toString();
 	}
 
-	// Returns the difficult wordlist
+	// Returns the difficulty of Wordlist
 	public InputStream difficult() {
 		String easy = "/wordlists/wordeasy.txt";
 		String medium = "/wordlists/wordmedium.txt";
 		String hard = "/wordlists/wordhard.txt";
 
-		InputStream in = null;
+		InputStream difficult = null;
 
 		if (this.easy.isSelected()) {
-			in = getClass().getResourceAsStream(easy);
+			difficult = getClass().getResourceAsStream(easy);
 
 		}
 		if (this.medium.isSelected()) {
-			in = getClass().getResourceAsStream(medium);
+			difficult = getClass().getResourceAsStream(medium);
 
 		}
 		if (this.hard.isSelected()) {
-			in = getClass().getResourceAsStream(hard);
+			difficult = getClass().getResourceAsStream(hard);
 
 		} else {
-			in = getClass().getResourceAsStream(easy);
+			difficult = getClass().getResourceAsStream(easy);
 
 		}
-		return in;
+		return difficult;
+	}
+// Exit Game
+	public void exit() {
+		System.exit(0);
 	}
 
 	// Preloader
