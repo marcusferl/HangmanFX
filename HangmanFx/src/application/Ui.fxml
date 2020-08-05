@@ -30,7 +30,7 @@
          <effect>
             <Bloom threshold="0.0" />
          </effect></ImageView>
-      <TextField fx:id="letter" disable="true" layoutX="37.0" layoutY="298.0" onKeyReleased="#checkLetter" prefHeight="72.0" prefWidth="82.0" promptText="...">
+      <TextField fx:id="letter" disable="true" layoutX="37.0" layoutY="298.0" onKeyReleased="#verifyTypedLetter" prefHeight="72.0" prefWidth="82.0" promptText="...">
          <font>
             <Font size="41.0" />
          </font>

@@ -102,27 +102,26 @@ public class Main extends Application {
 	}
 
 	// Check the letter from Textfield
-	public boolean letterCheck(char[] wortToArr, char[] displayWord) {
-
-		for (int i = 0; i < wort.length(); i++) {
-			if (letter.getText().isEmpty() == false) {
-				if (wortToArr[i] == letter.getText().toLowerCase().charAt(0)
+	public boolean arrayMatch(char[] wortToArr, char[] displayWord) {
+		boolean result = false;
+		if(!letter.getText().isEmpty()) {
+		for (int i = 0; i < wortToArr.length; i++) {
+			if(wortToArr[i] == letter.getText().toLowerCase().charAt(0)
 						|| wortToArr[i] == letter.getText().toUpperCase().charAt(0)) {
 					displayWord[i] = wortToArr[i];
-					return true;
+					result = true;
+					}
 				}
 
-			}
-
 		}
-		return false;
+		return result;
 	}
 
 	// Confirm\check typed Letter
-	public void checkLetter() {
+	public void verifyTypedLetter() {
 		info.setText("");
 
-		if (letterCheck(wortToArr, displayWord) == true) {
+		if (arrayMatch(wortToArr, displayWord)) {
 			rightletterString = new String(displayWord);
 			hangmanWord.setText(rightletterString);
 			info.setText("Richtig");
