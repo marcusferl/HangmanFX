@@ -110,6 +110,7 @@ public class Main extends Application {
 						|| wortToArr[i] == letter.getText().toUpperCase().charAt(0)) {
 					displayWord[i] = wortToArr[i];
 					result = true;
+					
 					}
 				}
 
