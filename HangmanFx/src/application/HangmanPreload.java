@@ -14,6 +14,7 @@ public class HangmanPreload extends Preloader {
 	private Stage preloaderStage;
 	private Scene scene;
 
+	
 	@Override
 	public void init() throws Exception {
 		Parent root1 = FXMLLoader.load(getClass().getResource("Preloader.fxml"));

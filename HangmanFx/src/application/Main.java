@@ -101,7 +101,7 @@ public class Main extends Application {
 		info.setText("");
 	}
 
-	// Check the letter from Textfield
+	// Check the letter from Textfields
 	public boolean arrayMatch(char[] wortToArr, char[] displayWord) {
 		boolean result = false;
 		if(!letter.getText().isEmpty()) {
