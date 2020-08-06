@@ -12,7 +12,6 @@ import javafx.scene.control.ProgressBar;
 public class StartScreenController implements Initializable {
 	
 	    
-	    
 	    @FXML
 	    private ProgressBar progressBar;
 	    

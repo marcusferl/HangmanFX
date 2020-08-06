@@ -111,6 +111,7 @@ public class Main extends Application {
 					displayWord[i] = wortToArr[i];
 					result = true;
 					
+					
 					}
 				}
 
