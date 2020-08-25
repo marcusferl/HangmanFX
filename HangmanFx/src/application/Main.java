@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -161,7 +162,7 @@ public class Main extends Application {
 
 		letter.setDisable(false);
 
-		BufferedReader bf = new BufferedReader(new InputStreamReader(difficult()));
+		BufferedReader bf = new BufferedReader(new InputStreamReader(difficult(),StandardCharsets.UTF_8));
 		try {
 			while ((line = bf.readLine()) != null) {
 				temp.add(line);
