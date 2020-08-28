@@ -132,8 +132,13 @@ public class Main extends Application {
 			AudioClip correctLetter = new AudioClip(
 					this.getClass().getResource("/sounds/correct.mp3").toExternalForm());
 			correctLetter.play();
+		}
+			
+				
+			
 
-		} else {
+		
+	else {
 			hangmanImage.setImage(new Image("/images/" + counter + ".png"));
 			info.setText("Falsch");
 			
@@ -150,6 +155,13 @@ public class Main extends Application {
 			hangmanWord.setText(wort);
 			AudioClip wrongLetter = new AudioClip(this.getClass().getResource("/sounds/gameover.mp3").toExternalForm());
 			wrongLetter.play();
+		}
+		else if(counter < 16 && String.valueOf(displayWord).equals(wort)) {
+			info.setText("Gewonnen!");
+			AudioClip winner = new AudioClip(this.getClass().getResource("/sounds/win.mp3").toExternalForm());
+			winner.play();
+			letter.setDisable(true);
+			
 		}
 	}
 
@@ -187,11 +199,11 @@ public class Main extends Application {
 			difficult = getClass().getResourceAsStream(easy);
 
 		}
-		if (this.medium.isSelected()) {
+		else if (this.medium.isSelected()) {
 			difficult = getClass().getResourceAsStream(medium);
 
 		}
-		if (this.hard.isSelected()) {
+		else if (this.hard.isSelected()) {
 			difficult = getClass().getResourceAsStream(hard);
 
 		} else {
